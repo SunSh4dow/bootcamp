@@ -60,7 +60,4 @@ class Circle{
         }
         return true;
     }
-    public String toString(){
-
-    }
 }
