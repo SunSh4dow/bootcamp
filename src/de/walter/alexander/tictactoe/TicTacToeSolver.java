@@ -47,13 +47,13 @@ public class TicTacToeSolver {
 
         for (int i = 0; i < tic.length; i++) {
             for (int j = 0; j < tic[i].length; j++) {
+                if (tic[i][j] != 0 && numOfFreePlaces == 0 && j == tic.length) {
+                    winner = "0";
+                    return winner;
+                }
                 if (tic[i][j] == 0) {
                     numOfFreePlaces++;
                     System.out.println(numOfFreePlaces);
-                }
-                if (tic[i][j] != 0 && numOfFreePlaces == 1 && j == tic.length) {
-                    winner = "0";
-                    return winner;
                 }
             }
         }
