@@ -1,3 +1,5 @@
+package de.walter.alexander.tasks;
+
 import java.util.Objects;
 
 public class Bootcamp {
@@ -16,6 +18,26 @@ public class Bootcamp {
         return s;
     }
 
+/*    public static void taskN(int m) {
+        int n = 1;
+        List<Integer> primes = new ArrayList<Integer>();
+        for(i=3;i<=m/2;i++){
+            if(n%i==0){
+                break;
+            }
+        }
+        System.out.print(primes);
+    }*/
+
+    public static int taskO(int n) {
+        if (n == 0)
+            return 0;
+        else if (n == 1)
+            return 1;
+        else
+            return taskO(n - 1) + taskO(n - 2);
+    }
+
     public static void main(String[] args) {
 
         boolean equal;
@@ -26,38 +48,15 @@ public class Bootcamp {
         System.out.println(" Task A - Are first char equal? " + equal);
         cutChar = StringObject.taskB(args[0]);
         System.out.println(" Task B - Remove starting x: " + cutChar);
-
-        /*String s1 = "String";
-        String s2 = s1;
-        s1 += "1";
-
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s1==s2);*/
+        //taskN(10000);
+        int fibo = Bootcamp.taskO(10);
+        System.out.println(Long.toString(fibo));
 
         String s1 = "Hallo ".trim();
         String s2 = "Hallo";
         boolean isEqualWrong = s1 == s2;
         boolean isEqual = s1.equals(s2);
-        boolean isEqualNS = Objects.equals(s1,s2);
-        System.out.println(isEqualWrong +" "+ isEqual +" "+ isEqualNS);
-    }
-}
-class Circle{
-    int radius;
-    int x;
-    int y;
-
-    boolean equals(Circle circle){
-        if (circle.radius != this.radius) {
-            return false;
-        }
-        if (circle.x != this.x) {
-            return false;
-        }
-        if (circle.y != this.y) {
-            return false;
-        }
-        return true;
+        boolean isEqualNS = Objects.equals(s1, s2);
+        System.out.println(isEqualWrong + " " + isEqual + " " + isEqualNS);
     }
 }

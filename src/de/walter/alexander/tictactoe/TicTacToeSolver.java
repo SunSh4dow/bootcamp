@@ -1,3 +1,6 @@
+package de.walter.alexander.tictactoe;
+
+import java.util.Objects;
 import java.util.Random;
 import java.util.Arrays;
 
@@ -7,8 +10,8 @@ public class TicTacToeSolver {
 
         boolean free = false;
         while (!free) {
-            int x = new Random().nextInt(3);
-            int y = new Random().nextInt(3);
+            int x = new Random().nextInt(tic.length);
+            int y = new Random().nextInt(tic.length);
 
             if (tic[x][y] == 0) {
                 free = true;
@@ -27,8 +30,8 @@ public class TicTacToeSolver {
 
         boolean free = false;
         while (!free) {
-            int q = new Random().nextInt(3);
-            int z = new Random().nextInt(3);
+            int q = new Random().nextInt(tic.length);
+            int z = new Random().nextInt(tic.length);
 
             if (tic[q][z] == 0) {
                 free = true;
@@ -40,7 +43,21 @@ public class TicTacToeSolver {
 
     public static String checker(int tic[][]) {
         String winner;
-        for (int p = 1; p < 3; p++) {
+        int numOfFreePlaces = 0;
+
+        for (int i = 0; i < tic.length; i++) {
+            for (int j = 0; j < tic[i].length; j++) {
+                if (tic[i][j] == 0) {
+                    numOfFreePlaces++;
+                    System.out.println(numOfFreePlaces);
+                }
+                if (numOfFreePlaces == 0 && j == tic.length) {
+                    winner = "Draw";
+                    return winner;
+                }
+            }
+        }
+        for (int p = 1; p < tic.length; p++) {
             for (int i = 0; i < tic.length; i++) {
                 for (int j = 0; j < tic[i].length; j++) {
 
@@ -80,18 +97,21 @@ public class TicTacToeSolver {
 
         int sizeOfField = Integer.parseInt(args[0]);
         String result = "None";
+        String result2 = "None";
+        //result = new String("None");
         int tic[][] = new int[sizeOfField][sizeOfField];
         TicTacToeSolver play = new TicTacToeSolver();
-        while (result == "None") {
+        while (Objects.equals(result2, result)) {
             tic = play.solver1(tic);
             play.printer(tic);
-            //result = play.checker(tic);
+            result2 = play.checker(tic);
+            if (!Objects.equals(result2, result)) break;
             tic = play.solver2(tic);
             play.printer(tic);
-            result = play.checker(tic);
+            result2 = play.checker(tic);
         }
-        System.out.println("The winner is player: " + result);
+        System.out.println("The winner is player: " + result2);
 
-        
+
     }
 }
