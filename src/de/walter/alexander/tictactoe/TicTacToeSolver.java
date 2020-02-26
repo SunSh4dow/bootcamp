@@ -51,8 +51,8 @@ public class TicTacToeSolver {
                     numOfFreePlaces++;
                     System.out.println(numOfFreePlaces);
                 }
-                if (numOfFreePlaces == 0 && j == tic.length) {
-                    winner = "Draw";
+                if (tic[i][j] != 0 && numOfFreePlaces == 1 && j == tic.length) {
+                    winner = "0";
                     return winner;
                 }
             }
@@ -96,21 +96,20 @@ public class TicTacToeSolver {
     public static void main(String[] args) {
 
         int sizeOfField = Integer.parseInt(args[0]);
-        String result = "None";
-        String result2 = "None";
+        String begin = "None" , result = "None";
         //result = new String("None");
         int tic[][] = new int[sizeOfField][sizeOfField];
         TicTacToeSolver play = new TicTacToeSolver();
-        while (Objects.equals(result2, result)) {
+        while (Objects.equals(result, begin)) {
             tic = play.solver1(tic);
             play.printer(tic);
-            result2 = play.checker(tic);
-            if (!Objects.equals(result2, result)) break;
+            result = play.checker(tic);
+            if (!Objects.equals(result, begin)) break;
             tic = play.solver2(tic);
             play.printer(tic);
-            result2 = play.checker(tic);
+            result = play.checker(tic);
         }
-        System.out.println("The winner is player: " + result2);
+        System.out.println("The winner is player: " + result);
 
 
     }
