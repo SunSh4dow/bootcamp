@@ -44,19 +44,9 @@ public class TicTacToeSolver {
     public static String checker(int tic[][]) {
         String winner;
         int numOfFreePlaces = 0;
+        boolean lastRound = false;
 
-        for (int i = 0; i < tic.length; i++) {
-            for (int j = 0; j < tic[i].length; j++) {
-                if (tic[i][j] != 0 && numOfFreePlaces == 0 && j == tic.length) {
-                    winner = "0";
-                    return winner;
-                }
-                if (tic[i][j] == 0) {
-                    numOfFreePlaces++;
-                    System.out.println(numOfFreePlaces);
-                }
-            }
-        }
+
         for (int p = 1; p < tic.length; p++) {
             for (int i = 0; i < tic.length; i++) {
                 for (int j = 0; j < tic[i].length; j++) {
@@ -87,6 +77,21 @@ public class TicTacToeSolver {
 
             }
 
+        }for (int i = 0; i < tic.length; i++) {
+            for (int j = 0; j < tic[i].length; j++) {
+
+                if (tic[i][j] == 0) {
+                    numOfFreePlaces++;
+                    //System.out.println(numOfFreePlaces);
+                }
+                if (tic[i][j] != 0 && numOfFreePlaces == 0 && i == tic.length-1 && j == tic.length-1 && lastRound==true) {
+                    winner = "No one, it's a draw.";
+                    return winner;
+                }
+                if (tic[i][j] != 0 && lastRound == false && numOfFreePlaces == 0){
+                    lastRound = true;
+                }
+            }
         }
         winner = "None";
         return winner;
@@ -97,14 +102,34 @@ public class TicTacToeSolver {
 
         int sizeOfField = Integer.parseInt(args[0]);
         String begin = "None" , result = "None";
-        //result = new String("None");
         int tic[][] = new int[sizeOfField][sizeOfField];
         TicTacToeSolver play = new TicTacToeSolver();
         while (Objects.equals(result, begin)) {
+            try
+            {
+                Thread.sleep(2000);
+                System.out.println("Player 1");
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+
             tic = play.solver1(tic);
             play.printer(tic);
             result = play.checker(tic);
+
             if (!Objects.equals(result, begin)) break;
+            try
+            {
+                Thread.sleep(2000);
+                System.out.println("Player 2");
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+
             tic = play.solver2(tic);
             play.printer(tic);
             result = play.checker(tic);
