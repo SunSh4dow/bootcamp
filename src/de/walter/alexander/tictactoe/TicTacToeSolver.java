@@ -77,18 +77,19 @@ public class TicTacToeSolver {
 
             }
 
-        }for (int i = 0; i < tic.length; i++) {
+        }
+        for (int i = 0; i < tic.length; i++) {
             for (int j = 0; j < tic[i].length; j++) {
 
                 if (tic[i][j] == 0) {
                     numOfFreePlaces++;
                     //System.out.println(numOfFreePlaces);
                 }
-                if (tic[i][j] != 0 && numOfFreePlaces == 0 && i == tic.length-1 && j == tic.length-1 && lastRound==true) {
+                if (tic[i][j] != 0 && numOfFreePlaces == 0 && i == tic.length - 1 && j == tic.length - 1 && lastRound == true) {
                     winner = "No one, it's a draw.";
                     return winner;
                 }
-                if (tic[i][j] != 0 && lastRound == false && numOfFreePlaces == 0){
+                if (tic[i][j] != 0 && lastRound == false && numOfFreePlaces == 0) {
                     lastRound = true;
                 }
             }
@@ -101,17 +102,14 @@ public class TicTacToeSolver {
     public static void main(String[] args) {
 
         int sizeOfField = Integer.parseInt(args[0]);
-        String begin = "None" , result = "None";
+        String begin = "None", result = "None";
         int tic[][] = new int[sizeOfField][sizeOfField];
         TicTacToeSolver play = new TicTacToeSolver();
         while (Objects.equals(result, begin)) {
-            try
-            {
+            try {
                 Thread.sleep(2000);
                 System.out.println("Player 1");
-            }
-            catch(InterruptedException ex)
-            {
+            } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
 
@@ -120,13 +118,10 @@ public class TicTacToeSolver {
             result = play.checker(tic);
 
             if (!Objects.equals(result, begin)) break;
-            try
-            {
+            try {
                 Thread.sleep(2000);
                 System.out.println("Player 2");
-            }
-            catch(InterruptedException ex)
-            {
+            } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
 
@@ -135,7 +130,5 @@ public class TicTacToeSolver {
             result = play.checker(tic);
         }
         System.out.println("The winner is player: " + result);
-
-
     }
 }
